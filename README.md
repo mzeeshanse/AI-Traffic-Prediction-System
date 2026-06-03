@@ -10,6 +10,10 @@ Enterprise-grade **Angular 18** dashboard for smart city traffic intelligence. C
 
 > Add screenshots after running the app: `Dashboard`, `AI Predictions`, `Historical Analytics`, `Smart City`, `AI Models`, `System Architecture`.
 
+## Screens
+
+![AI-Traffic-Prediction-System](AI-Traffic-Prediction-System/images/1.png)
+
 | Dashboard | AI Predictions |
 |-----------|----------------|
 | _screenshot_ | _screenshot_ |

@@ -1,0 +1,77 @@
+<div class="page predictions">
+  <header class="page-header">
+    <div>
+      <h1>AI Traffic Predictions</h1>
+      <p>24-hour forecasts powered by LSTM & XGBoost ensemble</p>
+    </div>
+  </header>
+
+  <div class="predictions__controls glass-card">
+    <div class="predictions__actions">
+      <button mat-flat-button color="primary" (click)="runPrediction24h()" [disabled]="loading()">
+        <mat-icon>auto_awesome</mat-icon>
+        Predict Next 24 Hours
+      </button>
+      <mat-form-field appearance="outline" class="date-field">
+        <mat-label>Future date</mat-label>
+        <input matInput type="date" [(ngModel)]="targetDate" />
+      </mat-form-field>
+      <button mat-stroked-button (click)="runFuturePrediction()" [disabled]="loading() || !targetDate">
+        <mat-icon>event</mat-icon>
+        Predict Date
+      </button>
+      <mat-form-field appearance="outline" class="model-field">
+        <mat-label>Model</mat-label>
+        <mat-select [(ngModel)]="modelType">
+          <mat-option value="ensemble">Ensemble</mat-option>
+          <mat-option value="lstm">LSTM</mat-option>
+          <mat-option value="xgboost">XGBoost</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    @if (processing()) {
+      <div class="ai-processing">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <span><mat-icon class="spin">psychology</mat-icon> AI engine processing traffic patterns...</span>
+      </div>
+    }
+  </div>
+
+  @if (loading() && !result()) {
+    <app-loading-spinner message="Generating AI predictions..." [overlay]="true"></app-loading-spinner>
+    <div class="chart-placeholder glass-card" style="min-height: 400px; position: relative;"></div>
+  }
+
+  @if (result(); as r) {
+    <div class="summary-card glass-card">
+      <mat-icon>summarize</mat-icon>
+      <p>{{ r.summary }}</p>
+      <small>Generated {{ r.generatedAt | date:'medium' }}</small>
+    </div>
+
+    <div class="kpi-grid">
+      @for (k of summaryKpis(); track k.id) {
+        <app-kpi-card [metric]="k"></app-kpi-card>
+      }
+    </div>
+
+    <div class="charts-grid">
+      <app-chart-card title="Traffic Prediction — 24h" subtitle="AI forecast line chart" icon="show_chart" [loading]="loading()">
+        @if (predictionChart(); as opts) {
+          <app-apex-chart [options]="opts"></app-apex-chart>
+        }
+      </app-chart-card>
+      <app-chart-card title="Historical vs Prediction" subtitle="Model comparison" icon="compare_arrows">
+        @if (comparisonChart(); as opts) {
+          <app-apex-chart [options]="opts"></app-apex-chart>
+        }
+      </app-chart-card>
+    </div>
+  } @else if (!loading()) {
+    <div class="empty-state glass-card">
+      <mat-icon>psychology</mat-icon>
+      <h3>Run an AI prediction</h3>
+      <p>Select 24-hour forecast or choose a future date to analyze expected traffic patterns.</p>
+    </div>
+  }
+</div>

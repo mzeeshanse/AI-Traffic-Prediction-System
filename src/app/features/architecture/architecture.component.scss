@@ -1,0 +1,96 @@
+.arch-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.arch-layer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.arch-node {
+  padding: 1.25rem;
+  min-width: 220px;
+  max-width: 280px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 212, 255, 0.15);
+  }
+
+  mat-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    color: var(--accent-cyan);
+    margin-bottom: 0.5rem;
+  }
+
+  h3 { margin: 0 0 0.5rem; font-size: 1rem; }
+  p { margin: 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+}
+
+.arch-arrow {
+  color: var(--accent-cyan);
+  animation: bounce 2s ease infinite;
+
+  mat-icon { font-size: 32px; width: 32px; height: 32px; }
+}
+
+.animate-flow {
+  animation: fadeUp 0.5s ease forwards;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.mermaid-section {
+  padding: 1.5rem;
+
+  h3 { margin: 0 0 1rem; }
+
+  .mermaid-code {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    color: var(--accent-cyan);
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    white-space: pre-wrap;
+  }
+
+  .mermaid-rendered {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+
+    .flow-box {
+      padding: 0.75rem 1.25rem;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+
+      &.highlight {
+        background: linear-gradient(135deg, rgba(124, 77, 255, 0.3), rgba(0, 212, 255, 0.2));
+        border-color: var(--accent-cyan);
+      }
+    }
+
+    mat-icon { color: var(--text-muted); }
+  }
+}

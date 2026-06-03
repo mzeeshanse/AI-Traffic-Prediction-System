@@ -1,0 +1,55 @@
+<header class="navbar glass-card">
+  <button class="navbar__menu-btn" mat-icon-button (click)="menuToggle.emit()" type="button">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <div class="navbar__search">
+    <mat-icon>search</mat-icon>
+    <input type="search" placeholder="Search intersections, cameras, zones..." [(ngModel)]="searchQuery" />
+  </div>
+
+  <div class="navbar__actions">
+    <div class="navbar__traffic">
+      <app-system-status [state]="trafficState" [label]="trafficLabel()"></app-system-status>
+    </div>
+
+    <span class="navbar__system">
+      <mat-icon>cloud_done</mat-icon>
+      System Online
+    </span>
+
+    <button mat-icon-button [matMenuTriggerFor]="notifMenu" type="button">
+      <mat-icon [matBadge]="notifications.length" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
+    </button>
+    <mat-menu #notifMenu="matMenu" class="notif-menu">
+      @for (n of notifications; track n.id) {
+        <button mat-menu-item>
+          <mat-icon>{{ n.type === 'ai' ? 'auto_awesome' : 'info' }}</mat-icon>
+          <span>
+            <strong>{{ n.title }}</strong><br />
+            <small>{{ n.message }}</small>
+          </span>
+        </button>
+      }
+    </mat-menu>
+
+    <button mat-icon-button (click)="theme.toggle()" type="button" [attr.aria-label]="'Toggle theme'">
+      <mat-icon>{{ theme.mode() === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="profileMenu" class="navbar__profile">
+      <mat-icon>account_circle</mat-icon>
+      <span>{{ auth.user()?.name || 'Operator' }}</span>
+    </button>
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item disabled>
+        <mat-icon>badge</mat-icon>
+        {{ auth.user()?.role || 'Guest' }}
+      </button>
+      <button mat-menu-item (click)="auth.logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
+  </div>
+</header>

@@ -1,0 +1,67 @@
+.predictions {
+  &__controls {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .date-field, .model-field {
+    min-width: 160px;
+  }
+
+  .ai-processing {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+    }
+
+    .spin {
+      animation: spin 2s linear infinite;
+    }
+  }
+
+  .summary-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+
+    mat-icon { color: var(--accent-cyan); }
+    p { margin: 0; flex: 1; line-height: 1.6; }
+    small { color: var(--text-muted); white-space: nowrap; }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+
+    mat-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: var(--accent-cyan);
+      opacity: 0.6;
+    }
+    h3 { margin: 1rem 0 0.5rem; }
+    p { color: var(--text-muted); max-width: 400px; margin: 0 auto; }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

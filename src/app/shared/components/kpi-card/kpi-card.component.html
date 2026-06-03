@@ -1,0 +1,13 @@
+<div class="kpi-card glass-card" [style.--accent]="metric.color || '#00d4ff'">
+  <div class="kpi-card__icon">
+    <mat-icon>{{ metric.icon }}</mat-icon>
+  </div>
+  <div class="kpi-card__body">
+    <span class="kpi-card__label">{{ metric.label }}</span>
+    <span class="kpi-card__value">{{ metric.value }}<small *ngIf="metric.unit">{{ metric.unit }}</small></span>
+    <span class="kpi-card__change" *ngIf="metric.change !== undefined" [class]="metric.trend">
+      <mat-icon>{{ metric.trend === 'up' ? 'trending_up' : metric.trend === 'down' ? 'trending_down' : 'trending_flat' }}</mat-icon>
+      {{ metric.change > 0 ? '+' : '' }}{{ metric.change }}%
+    </span>
+  </div>
+</div>

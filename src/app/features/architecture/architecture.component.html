@@ -1,0 +1,41 @@
+<div class="page architecture">
+  <header class="page-header">
+    <div>
+      <h1>System Architecture</h1>
+      <p>End-to-end smart city traffic prediction pipeline</p>
+    </div>
+  </header>
+
+  <div class="arch-flow">
+    @for (layer of layers(); track $index; let last = $last) {
+      <div class="arch-layer">
+        @for (node of layer; track node.id) {
+          <div class="arch-node glass-card animate-flow">
+            <mat-icon>{{ node.icon }}</mat-icon>
+            <h3>{{ node.label }}</h3>
+            <p>{{ node.description }}</p>
+          </div>
+        }
+      </div>
+      @if (!last) {
+        <div class="arch-arrow">
+          <mat-icon>arrow_downward</mat-icon>
+        </div>
+      }
+    }
+  </div>
+
+  <div class="mermaid-section glass-card">
+    <h3>Architecture Diagram</h3>
+    <pre class="mermaid-code">{{ mermaidDiagram }}</pre>
+    <div class="mermaid-rendered">
+      <div class="flow-box">Angular 18</div>
+      <mat-icon>arrow_forward</mat-icon>
+      <div class="flow-box">FastAPI</div>
+      <mat-icon>arrow_forward</mat-icon>
+      <div class="flow-box">Redis + SQL Server</div>
+      <mat-icon>arrow_forward</mat-icon>
+      <div class="flow-box highlight">AI Engine</div>
+    </div>
+  </div>
+</div>

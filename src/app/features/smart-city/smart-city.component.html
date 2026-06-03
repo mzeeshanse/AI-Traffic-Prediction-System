@@ -1,0 +1,60 @@
+<div class="page smart-city">
+  <header class="page-header">
+    <div>
+      <h1>Smart City Monitoring</h1>
+      <p>Intersections, ANPR cameras & live mobility indicators</p>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <app-skeleton-loader [height]="400"></app-skeleton-loader>
+  } @else {
+    @if (status(); as s) {
+    <div class="smart-city__hero glass-card">
+      <div class="mobility-ring" [style.--score]="s.mobilityScore">
+        <span class="mobility-ring__value">{{ s.mobilityScore }}</span>
+        <span class="mobility-ring__label">Mobility Score</span>
+      </div>
+      <div class="smart-city__stats">
+        <div class="stat-widget animate-in">
+          <mat-icon>alt_route</mat-icon>
+          <strong>{{ s.intersections }}</strong>
+          <span>Connected Intersections</span>
+        </div>
+        <div class="stat-widget animate-in" style="animation-delay: 0.1s">
+          <mat-icon>videocam</mat-icon>
+          <strong>{{ s.activeCameras }}</strong>
+          <span>Active ANPR Cameras</span>
+        </div>
+        <div class="stat-widget animate-in" style="animation-delay: 0.2s">
+          <mat-icon>directions_car</mat-icon>
+          <strong>{{ s.vehiclesProcessed | number }}</strong>
+          <span>Vehicles Processed</span>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Congestion Zones</h2>
+    <div class="zones-grid">
+      @for (z of s.congestionZones; track z.id) {
+        <div class="zone-card glass-card" [class]="zoneClass(z.level)">
+          <mat-icon>place</mat-icon>
+          <h4>{{ z.name }}</h4>
+          <span class="zone-card__level">{{ z.level }}</span>
+          <strong>{{ z.vehicles }} vehicles</strong>
+        </div>
+      }
+    </div>
+
+    <h2 class="section-title">Live Statistics</h2>
+    <div class="live-stats">
+      @for (stat of s.liveStats; track stat.label) {
+        <div class="live-stat glass-card" [class]="'status-' + stat.status">
+          <span>{{ stat.label }}</span>
+          <strong>{{ stat.value }}</strong>
+        </div>
+      }
+    </div>
+    }
+  }
+</div>

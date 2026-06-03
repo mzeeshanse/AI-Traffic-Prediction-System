@@ -1,0 +1,25 @@
+<div class="login-page">
+  <div class="login-bg"></div>
+  <mat-card class="login-card glass-card">
+    <div class="login-card__brand">
+      <mat-icon>traffic</mat-icon>
+      <h1>AI Traffic Prediction</h1>
+      <p>Smart City Intelligence Platform</p>
+    </div>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" [(ngModel)]="email" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [(ngModel)]="password" (keyup.enter)="login()" />
+    </mat-form-field>
+    @if (error) {
+      <p class="error">{{ error }}</p>
+    }
+    <button mat-flat-button color="primary" class="full-width" (click)="login()">
+      Sign In
+    </button>
+    <p class="demo-hint">Demo: any email, password with 4+ characters</p>
+  </mat-card>
+</div>

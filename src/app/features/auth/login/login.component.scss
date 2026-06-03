@@ -1,0 +1,43 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: var(--bg-primary);
+}
+
+.login-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.12), transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(124, 77, 255, 0.1), transparent 40%);
+}
+
+.login-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem !important;
+  margin: 1rem;
+
+  &__brand {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      color: var(--accent-cyan);
+    }
+
+    h1 { margin: 0.5rem 0 0; font-size: 1.35rem; }
+    p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+  }
+
+  .full-width { width: 100%; margin-bottom: 0.5rem; }
+  .error { color: #ff5252; font-size: 0.85rem; }
+  .demo-hint { text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem; }
+}

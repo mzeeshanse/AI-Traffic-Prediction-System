@@ -1,0 +1,44 @@
+.ai-insight {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+  border-left: 3px solid var(--accent-cyan);
+
+  mat-icon {
+    color: var(--accent-cyan);
+    flex-shrink: 0;
+  }
+
+  &__tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-cyan);
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0.35rem 0 0;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  &__pulse {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent-cyan);
+    animation: pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

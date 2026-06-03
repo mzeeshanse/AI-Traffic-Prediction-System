@@ -1,0 +1,45 @@
+<div class="page dashboard">
+  <header class="page-header">
+    <div>
+      <h1>Smart City Control Center</h1>
+      <p>Real-time traffic intelligence & AI-powered overview</p>
+    </div>
+    <span class="live-badge"><span class="pulse"></span> Live</span>
+  </header>
+
+  @if (loading() && !data()) {
+    <div class="kpi-grid">
+      @for (i of [1,2,3,4,5,6,7]; track i) {
+        <app-skeleton-loader [height]="100"></app-skeleton-loader>
+      }
+    </div>
+  } @else {
+    @if (data(); as d) {
+    <app-ai-insight-panel [message]="d.aiInsight" class="mb"></app-ai-insight-panel>
+
+    <div class="kpi-grid">
+      @for (kpi of d.kpis; track kpi.id) {
+        <app-kpi-card [metric]="kpi"></app-kpi-card>
+      }
+    </div>
+
+    <div class="charts-grid">
+      <app-chart-card title="Real-Time Traffic Trend" subtitle="Vehicles per hour — live feed" icon="timeline">
+        @if (realtimeChart(); as opts) {
+          <app-apex-chart [options]="opts"></app-apex-chart>
+        }
+      </app-chart-card>
+      <app-chart-card title="Prediction Overview" subtitle="24h AI forecast snapshot" icon="psychology">
+        @if (predictionChart(); as opts) {
+          <app-apex-chart [options]="opts"></app-apex-chart>
+        }
+      </app-chart-card>
+      <app-chart-card class="span-2" title="Hourly Traffic Visualization" subtitle="Today's distribution" icon="bar_chart">
+        @if (hourlyChart(); as opts) {
+          <app-apex-chart [options]="opts"></app-apex-chart>
+        }
+      </app-chart-card>
+    </div>
+    }
+  }
+</div>

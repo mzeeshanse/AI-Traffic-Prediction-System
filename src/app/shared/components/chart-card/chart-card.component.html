@@ -1,0 +1,15 @@
+<div class="chart-card glass-card">
+  <div class="chart-card__header" *ngIf="title">
+    <div class="chart-card__title-wrap">
+      <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+      <div>
+        <h3>{{ title }}</h3>
+        <p *ngIf="subtitle">{{ subtitle }}</p>
+      </div>
+    </div>
+    <ng-content select="[chartActions]"></ng-content>
+  </div>
+  <div class="chart-card__body" [class.loading]="loading">
+    <ng-content></ng-content>
+  </div>
+</div>

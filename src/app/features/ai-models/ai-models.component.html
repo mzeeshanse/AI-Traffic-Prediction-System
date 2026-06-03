@@ -1,0 +1,44 @@
+<div class="page ai-models">
+  <header class="page-header">
+    <div>
+      <h1>AI Model Monitoring</h1>
+      <p>Enterprise ML operations — LSTM, XGBoost & ensemble metrics</p>
+    </div>
+  </header>
+
+  @if (model(); as m) {
+    <div class="model-hero glass-card">
+      <div class="model-hero__badge" [class.active]="m.status === 'active'">{{ m.status }}</div>
+      <mat-icon>psychology</mat-icon>
+      <div>
+        <h2>{{ m.name }}</h2>
+        <p>{{ m.type }} · v{{ m.version }}</p>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <app-kpi-card [metric]="{ id: 'acc', label: 'Model Accuracy', value: m.accuracy + '%', icon: 'verified', color: '#00e676', trend: 'up', change: 1.2 }"></app-kpi-card>
+      <app-kpi-card [metric]="{ id: 'mae', label: 'MAE', value: m.mae, icon: 'analytics', color: '#00d4ff', trend: 'stable' }"></app-kpi-card>
+      <app-kpi-card [metric]="{ id: 'rmse', label: 'RMSE', value: m.rmse, icon: 'show_chart', color: '#7c4dff', trend: 'stable' }"></app-kpi-card>
+      <app-kpi-card [metric]="{ id: 'conf', label: 'Prediction Confidence', value: m.confidence + '%', icon: 'speed', color: '#ff9800', trend: 'up' }"></app-kpi-card>
+      <app-kpi-card [metric]="{ id: 'ds', label: 'Training Dataset', value: (m.datasetSize | number) + ' records', icon: 'storage', color: '#40c4ff', trend: 'stable' }"></app-kpi-card>
+      <app-kpi-card [metric]="{ id: 'trained', label: 'Last Training', value: (m.lastTrained | date:'mediumDate') || '—', icon: 'update', color: '#69f0ae', trend: 'stable' }"></app-kpi-card>
+    </div>
+
+    <div class="model-details">
+      <div class="glass-card model-type-card">
+        <h3>Model Architecture</h3>
+        <div class="model-type-card__items">
+          <div><mat-icon>memory</mat-icon><span>LSTM</span><small>Temporal sequences</small></div>
+          <div><mat-icon>forest</mat-icon><span>XGBoost</span><small>Feature boosting</small></div>
+          <div><mat-icon>hub</mat-icon><span>Ensemble</span><small>Weighted fusion</small></div>
+        </div>
+        <mat-progress-bar mode="determinate" [value]="m.accuracy"></mat-progress-bar>
+        <small>Overall accuracy {{ m.accuracy }}%</small>
+      </div>
+      <app-chart-card title="Prediction Accuracy Trend" subtitle="Weekly model performance" icon="trending_up">
+        @if (accuracyChart(); as o) { <app-apex-chart [options]="o"></app-apex-chart> }
+      </app-chart-card>
+    </div>
+  }
+</div>

@@ -1,0 +1,36 @@
+<div class="page analytics">
+  <header class="page-header">
+    <div>
+      <h1>Historical Analytics</h1>
+      <p>Traffic patterns, peak trends & density analysis</p>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <div class="kpi-grid">
+      @for (i of [1,2,3,4]; track i) {
+        <app-skeleton-loader [height]="100"></app-skeleton-loader>
+      }
+    </div>
+  } @else {
+    <div class="kpi-grid">
+      @for (k of kpis(); track k.id) {
+        <app-kpi-card [metric]="k"></app-kpi-card>
+      }
+    </div>
+    <div class="charts-grid">
+      <app-chart-card title="Weekday vs Weekend" subtitle="Average daily volume comparison" icon="compare">
+        @if (weekdayChart(); as o) { <app-apex-chart [options]="o"></app-apex-chart> }
+      </app-chart-card>
+      <app-chart-card title="Monthly Traffic Growth" subtitle="6-month trend" icon="show_chart">
+        @if (monthlyChart(); as o) { <app-apex-chart [options]="o"></app-apex-chart> }
+      </app-chart-card>
+      <app-chart-card title="Hourly Traffic Density" subtitle="Peak-hour distribution" icon="insights">
+        @if (densityChart(); as o) { <app-apex-chart [options]="o"></app-apex-chart> }
+      </app-chart-card>
+      <app-chart-card class="span-2" title="Traffic Heatmap" subtitle="Day × hour density" icon="grid_on">
+        @if (heatmapChart(); as o) { <app-apex-chart [options]="o"></app-apex-chart> }
+      </app-chart-card>
+    </div>
+  }
+</div>
